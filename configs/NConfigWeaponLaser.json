@@ -1,0 +1,7 @@
+{
+  "damage" : 15,
+  "cooldown" : 25,
+  "range" : 250,
+  "size" : 25,
+  "fallOffRange" : 500
+}

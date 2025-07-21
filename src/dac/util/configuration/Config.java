@@ -1,5 +1,6 @@
 package dac.util.configuration;
 
+import java.util.Map;
 
 public abstract class Config {
     public final static int screenSizeWidth = 800;
@@ -31,4 +32,13 @@ public abstract class Config {
     public final static int enemy1BaseRadius = enemy1BaseDurchmesser/2;
     public final static int enemy1BaseHP = 30;
     public final static int enemy1BaseSpeed = 50;
+
+    
+    public static Map<String, Class<? extends Config>> getConfigClasses() {
+        return Map.of(
+            "NConfigWeapon", NConfigWeapon.class,
+            "NConfigWeaponLaser", NConfigWeaponLaser.class,
+            "NConfigWeaponGrenade", NConfigWeaponGrenade.class
+        );
+    }
 }

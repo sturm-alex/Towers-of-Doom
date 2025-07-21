@@ -3,6 +3,7 @@ package dac;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import dac.entities.Base;
 import dac.entities.Effect;
@@ -10,7 +11,7 @@ import dac.entities.Enemy;
 import dac.entities.Spawner;
 import dac.util.Timer;
 import dac.util.configuration.Config;
-import dac.util.configuration.ConfigGame;
+import dac.util.configuration.NConfig;
 import dac.weapon.Weapon;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -19,7 +20,6 @@ import processing.core.PVector;
 public class Game extends PApplet {
     static Game game = null;
 
-    private ConfigGame config;
     private Base base;
     private List<Enemy> enemies = new ArrayList<>();
     private List<Enemy> enemiesRemovalList = new ArrayList<>();
@@ -32,13 +32,12 @@ public class Game extends PApplet {
     
     public Game() {
         super();
-        this.config = new ConfigGame( Config.screenSizeWidth, Config.screenSizeHeight );
         game = this;
     }
 
 
     public void settings() {
-        size( config.screenWidth(), config.screenHeight() );
+        size( Config.screenSizeWidth, Config.screenSizeHeight );
     }
 
 
@@ -52,6 +51,14 @@ public class Game extends PApplet {
         Locale.setDefault(Locale.US);
         
         Timer.createSingleton( this );
+        
+        Map<String,Config> configs = NConfig.getInstance().loadAllConfigs( Config.getConfigClasses() );
+        System.out.println("Loaded configs: " + configs.keySet());
+        // Map<String,Config> configs = new HashMap<>();
+        // configs.put( "NConfigWeaponLaser", new NConfigWeaponLaser() );
+        // configs.put( "NConfigWeaponGrenade", new NConfigWeaponGrenade() );
+        // System.out.println("Loaded configs: " + configs.keySet());
+        // NConfig.getInstance().saveAllConfigs( configs );
 
         base = new Base( width * 0.5f, height * 0.5f, 100, 100 );
 

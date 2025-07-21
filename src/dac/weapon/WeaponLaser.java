@@ -2,15 +2,17 @@ package dac.weapon;
 
 import dac.Game;
 import dac.entities.EffectLaser;
-import dac.util.configuration.ConfigWeapon;
-
+import dac.util.configuration.NConfigWeaponLaser;
 import processing.core.PVector;
 
 public class WeaponLaser extends Weapon {
 
-    
-    public WeaponLaser( ConfigWeapon c ) {
-        super( c );
+    private int fallOffRange;
+
+
+    public WeaponLaser( NConfigWeaponLaser laserConfig ) {
+        super( laserConfig );
+        this.fallOffRange = laserConfig.fallOffRange;
     }
 
 

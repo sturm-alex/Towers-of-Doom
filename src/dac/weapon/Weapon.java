@@ -2,7 +2,9 @@ package dac.weapon;
 
 import dac.util.Timer;
 import dac.util.configuration.Config;
-import dac.util.configuration.ConfigWeapon;
+import dac.util.configuration.NConfigWeapon;
+import dac.util.configuration.NConfigWeaponGrenade;
+import dac.util.configuration.NConfigWeaponLaser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,8 +14,20 @@ public abstract class Weapon {
     static Map<String,Weapon> weapons = new HashMap<>();
 
     static {
-        weapons.put("Bomb", new WeaponBomb( new ConfigWeapon( Config.granadeBaseDamage, Config.granadeAktivationInterval, Config.grenadeRange, Config.granadeBaseDurchmesser ) ) );
-        weapons.put("Laser", new WeaponLaser( new ConfigWeapon( Config.laserBaseDamage, Config.laserCooldown, Config.laserRange, Config.laserSize ) ) );
+        NConfigWeaponGrenade grenadeConfig = new NConfigWeaponGrenade();
+        grenadeConfig.damage = Config.granadeBaseDamage;
+        grenadeConfig.cooldown = Config.granadeAktivationInterval;
+        grenadeConfig.range = Config.grenadeRange;
+        grenadeConfig.size = Config.granadeBaseDurchmesser;
+        grenadeConfig.fallOffSizePercent = 0.75f;
+        weapons.put("Bomb", new WeaponBomb( grenadeConfig ) );
+        NConfigWeaponLaser laserConfig = new NConfigWeaponLaser();
+        laserConfig.damage = Config.laserBaseDamage;
+        laserConfig.cooldown = Config.laserCooldown;    
+        laserConfig.range = Config.laserRange;
+        laserConfig.size = Config.laserSize;
+        laserConfig.fallOffRange = 200;
+        weapons.put("Laser", new WeaponLaser( laserConfig ) );
         // Add more weapons as needed
     }
 
@@ -33,18 +47,21 @@ public abstract class Weapon {
     protected float range = 0;
     protected float size = 0;
 
+    private NConfigWeapon config = null;
 
-    Weapon( float damage, long cooldown, float range, float size ) {
-        this.damage = damage;
-        this.cooldownRemaining = 0l;
-        this.cooldownMax = cooldown;
-        this.range = range;
-        this.size = size;
+
+    public Weapon( NConfigWeapon c ) {
+        this.config = c;
+        this.reloadFromConfig();
     }
 
 
-    public Weapon( ConfigWeapon c ) {
-        this( c.damage(), c.cooldownMax(), c.range(), c.size() );
+    private void reloadFromConfig() {
+        this.damage = config.damage;
+        this.cooldownRemaining = 0;
+        this.cooldownMax = config.cooldown;
+        this.range = config.range;
+        this.size = config.size;
     }
 
 

@@ -2,16 +2,16 @@ package dac.weapon;
 
 import dac.Game;
 import dac.entities.EffectExplosion;
-import dac.util.configuration.ConfigWeapon;
-
+import dac.util.configuration.NConfigWeaponGrenade;
 import processing.core.PVector;
 
 
 public class WeaponBomb extends Weapon {
-
+    float fallOffSizePercent;
     
-    public WeaponBomb(ConfigWeapon c) {
-        super(c);
+    public WeaponBomb( NConfigWeaponGrenade c ) {
+        super( c );
+        this.fallOffSizePercent = c.fallOffSizePercent;
     }
 
 
