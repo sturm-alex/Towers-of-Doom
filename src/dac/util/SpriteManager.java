@@ -27,6 +27,8 @@ public class SpriteManager {
     public void loadAllImages() {
         this.spriteFiles = List.of(
             "explosion_1to4.png",
+            "explosion_1to4_22.png",
+            "explosion_1to4_big.png",
             "enemy_1.png",
             "enemy_2.png",
             "player_ship.png"
@@ -56,10 +58,10 @@ public class SpriteManager {
         this.spriteAnimations = Map.of(
             "EffectExplosion", new SpriteAnimation(
                 new PImage[] {
-                    getSprite( "explosion_1to4.png", 0 ),
-                    getSprite( "explosion_1to4.png", 1 ),
-                    getSprite( "explosion_1to4.png", 2 ),
-                    getSprite( "explosion_1to4.png", 3 )
+                    getSprite( "explosion_1to4_big.png", 0 ),
+                    getSprite( "explosion_1to4_big.png", 1 ),
+                    getSprite( "explosion_1to4_big.png", 2 ),
+                    getSprite( "explosion_1to4_big.png", 3 )
                 },
                 new float[] { 150, 250, 350, 500 }
             )

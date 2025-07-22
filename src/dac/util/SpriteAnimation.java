@@ -43,7 +43,7 @@ public class SpriteAnimation {
             }
         }
 
-        System.out.println("Current Frame: " + currentFrame + ", Time: " + currentTime);
+        // System.out.println("Current Frame: " + currentFrame + ", Time: " + currentTime);
     }
 
 

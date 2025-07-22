@@ -60,10 +60,10 @@ public class EffectExplosion extends Effect {
         pG.image( spriteAnimation.getCurrentSprite(), position.x, position.y, size, size );
 
         // Debugview
-        pG.strokeWeight( 1f );
-        pG.stroke( pG.color( 255 ) );
-        pG.fill( pG.color( 255, 0, 0, 63 ) );
-        pG.circle( position.x, position.y, size );
+        // pG.strokeWeight( 1f );
+        // pG.stroke( pG.color( 255 ) );
+        // pG.fill( pG.color( 255, 0, 0, 63 ) );
+        // pG.circle( position.x, position.y, size );
     }
 
 }
