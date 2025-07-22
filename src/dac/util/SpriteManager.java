@@ -1,6 +1,7 @@
 package dac.util;
 
 import java.util.List;
+import java.util.Map;
 
 import dac.Game;
 import processing.core.PApplet;
@@ -11,13 +12,15 @@ public class SpriteManager {
 
     private final String pathToSprites;
     private List<String> spriteFiles;
-    private PImage[] sprites;
+    private PImage[][] sprites;
+    private Map<String,SpriteAnimation> spriteAnimations;
 
 
     public SpriteManager( String pathToSprites ) {
         this.pathToSprites = pathToSprites;
 
         this.loadAllImages();
+        this.loadAllAnimations();
     }
 
 
@@ -29,18 +32,55 @@ public class SpriteManager {
             "player_ship.png"
         );
 
-        this.sprites = new PImage[ spriteFiles.size() ];
+        this.sprites = new PImage[ spriteFiles.size() ][];
 
         PApplet pA = Game.getInstance();
-        for( int i = 0; i < sprites.length; i++ ) {
-            sprites[ i ] = pA.loadImage( pathToSprites + spriteFiles.get( i ).toLowerCase() );
+        for( int i = 0; i < sprites.length; i++ )
+        {
+            PImage s = pA.loadImage( pathToSprites + spriteFiles.get( i ).toLowerCase() );
+            int a = s.height;
+            int count = (int) s.width / a; // Assuming each sprite is square
+            if( count <= 1 )
+                sprites[ i ] = new PImage[] { s };
+            else
+            {
+                sprites[ i ] = new PImage[ count ];
+                for( int j = 0; j < count; j++ )
+                    sprites[ i ][ j ] = s.get( j * a, 0, a, a );
+            }
         }  
     }
 
 
-    public PImage getSprite( String string ) {
-        int idx = this.spriteFiles.indexOf( string );
-        assert idx >= 0 && idx < this.sprites.length : "Sprite not found: " + string;
-        return this.sprites[ idx ];
+    private void loadAllAnimations() {
+        this.spriteAnimations = Map.of(
+            "EffectExplosion", new SpriteAnimation(
+                new PImage[] {
+                    getSprite( "explosion_1to4.png", 0 ),
+                    getSprite( "explosion_1to4.png", 1 ),
+                    getSprite( "explosion_1to4.png", 2 ),
+                    getSprite( "explosion_1to4.png", 3 )
+                },
+                new float[] { 150, 250, 350, 500 }
+            )
+        );
+    }
+
+
+    public PImage getSprite( String name ) {
+        return this.getSprite( name, 0 );
+    }
+
+
+    public PImage getSprite( String name, int index ) {
+        int idx = this.spriteFiles.indexOf( name );
+        assert idx >= 0 && idx < this.sprites.length : "Sprite-Atlas not found: " + name;
+        assert index >= 0 && index < this.sprites[ idx ].length : "Sprite index out of bounds: " + index + " for atlas: " + name;
+        return this.sprites[ idx ][ index ];
+    }
+
+
+    public SpriteAnimation getSpriteAnimation( String name ) {
+        return this.spriteAnimations.get( name );
     }
 }

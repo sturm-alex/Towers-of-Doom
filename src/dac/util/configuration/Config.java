@@ -16,7 +16,7 @@ public abstract class Config {
     public final static int granadeBaseRadius = granadeBaseDurchmesser/2;
     public final static int granadeBaseDamage = 50;
     public final static int granadeBaseDamageMult = 1;
-    public final static int granadeBaseBurnTime = 60;
+    public final static int grenadeExplosionDuration = 500;
     public final static int granadeAktivationInterval= 1000;//milliseconds
     public final static int grenadeRange = 500;
 

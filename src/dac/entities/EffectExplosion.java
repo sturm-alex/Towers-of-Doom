@@ -1,8 +1,9 @@
 package dac.entities;
 
 import dac.Game;
+import dac.util.SpriteAnimation;
 import dac.util.collision.ColliderCircle;
-
+import dac.util.configuration.Config;
 import processing.core.PApplet;
 import processing.core.PGraphics;
 import processing.core.PImage;
@@ -16,17 +17,20 @@ public class EffectExplosion extends Effect {
     private ColliderCircle collider;
 
     private PImage sprite;
+    private SpriteAnimation spriteAnimation;
 
 
     public EffectExplosion(float damage, PVector position, float size) {
-        super( position, 150 );
+        super( position, Config.grenadeExplosionDuration );
         this.damage = damage;
         this.size = size;
         this.collider = new ColliderCircle( position, size * 0.5f );
 
-        // this.sprite = ( (PApplet) Game.getInstance() ).loadImage( "assets/graphics/sprites/explosion_1to4.png" );
-        this.sprite = Game.getInstance().getSpriteManager().getSprite( "explosion_1to4.png" );
+        this.sprite = Game.getInstance().getSpriteManager().getSprite( "explosion_1to4.png", 3 );
         assert this.sprite != null : "Sprite for EffectExplosion not found!";
+        
+        this.spriteAnimation = Game.getInstance().getSpriteManager().getSpriteAnimation( "EffectExplosion" ).getNewInstance();
+        assert this.spriteAnimation != null : "SpriteAnimation for EffectExplosion not found!";
     }
 
 
@@ -42,6 +46,8 @@ public class EffectExplosion extends Effect {
                     enemy.takeDamage( PApplet.round( damage ) );
             }
         }
+
+        spriteAnimation.update();
     }
 
 
@@ -51,7 +57,7 @@ public class EffectExplosion extends Effect {
             return;
 
         pG.imageMode( PGraphics.CENTER );
-        pG.image( sprite, position.x, position.y, size, size );
+        pG.image( spriteAnimation.getCurrentSprite(), position.x, position.y, size, size );
 
         // Debugview
         pG.strokeWeight( 1f );
