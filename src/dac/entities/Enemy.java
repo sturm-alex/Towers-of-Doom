@@ -3,7 +3,7 @@ package dac.entities;
 import dac.util.Timer;
 import dac.util.collision.Collider;
 import dac.util.collision.ColliderCircle;
-
+import dac.util.configuration.Config;
 import processing.core.PGraphics;
 import processing.core.PVector;
 
@@ -12,9 +12,9 @@ import processing.core.PVector;
 public class Enemy {
     private PVector position;
     private PVector target;
-    private final float speed = 50.0f;
-    private final float radius = 10.0f;
-    private int health = 100;
+    private final float speed = Config.enemy1BaseSpeed;
+    private final float radius = Config.enemy1BaseRadius;
+    private int health = Config.enemy1BaseHP;
     private boolean alive = true;
     private ColliderCircle collider;
 
@@ -60,10 +60,11 @@ public class Enemy {
 
 
     public void render( PGraphics pG ) {
-        pG.strokeWeight( 3f );
-        pG.stroke( pG.color( 255, 63, 63 ) );
+        // pG.strokeWeight( 3f );
+        // pG.stroke( pG.color( 255, 63, 63 ) );
+        pG.noStroke();
         pG.fill( pG.color( 255, 191, 191 ) );
-        pG.circle( position.x, position.y, 2f * radius );
+        pG.ellipse( position.x, position.y, 2f * radius, 2f * radius );
     }
 
 

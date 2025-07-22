@@ -26,7 +26,9 @@ public class Spawner {
         cooldown += Timer.getInstance().getDeltaMillis();
 
         if ( cooldown >= spawnInterval ) {
-            spawnEnemy();
+            int numEnemies = cooldown / spawnInterval;
+            for( int i = 0; i < numEnemies; i++ )
+                spawnEnemy();
             cooldown -= spawnInterval;
         }
     }

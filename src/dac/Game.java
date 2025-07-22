@@ -40,7 +40,7 @@ public class Game extends PApplet {
 
 
     public void settings() {
-        size( Config.screenSizeWidth, Config.screenSizeHeight );
+        size( Config.screenSizeWidth, Config.screenSizeHeight, P2D );
     }
 
 
@@ -49,11 +49,11 @@ public class Game extends PApplet {
         surface.setAlwaysOnTop( true );
         surface.setLocation( 100, 100 );
         surface.setTitle( "Save Haven from Destruction by Evil Forces!" );
+
+        frameRate( 250 );
   
         // Setze die Default-Locale auf US (z. B. für nf() → Dezimalpunkt)
         Locale.setDefault(Locale.US);
-        
-        Timer.createSingleton( this );
         
         Map<String,Config> configs = NConfig.getInstance().loadAllConfigs( Config.getConfigClasses() );
         System.out.println("Loaded configs: " + configs.keySet());
@@ -65,22 +65,23 @@ public class Game extends PApplet {
 
         spriteManager = new SpriteManager( "assets/graphics/sprites/" );
 
-        base = new Base( width * 0.5f, height * 0.5f, 100, 100 );
+        base = new Base( width * 0.5f, height * 0.5f, Config.baseDiameter, Config.playerBaseHP );
 
         enemies = new ArrayList<>();
 
-        spawner = new Spawner( this, enemies, base.getPosition(), 500 );
+        spawner = new Spawner( this, enemies, base.getPosition(), Config.enemySpawnInterval );
 
         activeWeapon = Weapon.get( "Bomb" );
         System.out.println("Weapon selected: Bomb" );
         weaponsInventory.add( Weapon.get( "Laser" ) );
+        
+        Timer.createSingleton( this );
     }
 
 
     public void draw() {
         if( frameCount % 60 == 0 )
             println( Timer.getInstance() );
-
             
         
         /* ******************
@@ -143,6 +144,13 @@ public class Game extends PApplet {
 
         for( Effect effect : effects )
             effect.render( this.g );
+
+        /* *****************
+         * *** UI RENDER ***
+         * ***************** */
+        fill( 255 ) ;
+        textAlign( LEFT, TOP );
+        text( "FPS: " + nf( frameRate, 0, 1 ), 10, 10 );
     }
 
 
@@ -196,10 +204,10 @@ public class Game extends PApplet {
     public void keyReleased() {
         if( keyCode == UP ) {
             weaponsInventory.addLast( activeWeapon );
-            activeWeapon = weaponsInventory.getFirst();
+            activeWeapon = weaponsInventory.removeFirst();
         } else if( keyCode == DOWN ) {
             weaponsInventory.addFirst( activeWeapon );
-            activeWeapon = weaponsInventory.getLast();
+            activeWeapon = weaponsInventory.removeLast();
         }
     }
 

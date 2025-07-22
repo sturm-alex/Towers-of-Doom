@@ -57,13 +57,13 @@ public class EffectExplosion extends Effect {
             return;
 
         pG.imageMode( PGraphics.CENTER );
-        pG.image( spriteAnimation.getCurrentSprite(), position.x, position.y, size, size );
+        pG.image( spriteAnimation.getCurrentSprite(), position.x, position.y, size*1.5f, size*1.5f );
 
         // Debugview
-        // pG.strokeWeight( 1f );
-        // pG.stroke( pG.color( 255 ) );
-        // pG.fill( pG.color( 255, 0, 0, 63 ) );
-        // pG.circle( position.x, position.y, size );
+        pG.strokeWeight( 1f );
+        pG.stroke( pG.color( 255 ) );
+        pG.fill( pG.color( 255, 0, 0, 63 ) );
+        pG.circle( position.x, position.y, size );
     }
 
 }
