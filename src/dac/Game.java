@@ -9,6 +9,7 @@ import dac.entities.Base;
 import dac.entities.Effect;
 import dac.entities.Enemy;
 import dac.entities.Spawner;
+import dac.util.SpriteManager;
 import dac.util.Timer;
 import dac.util.configuration.Config;
 import dac.util.configuration.NConfig;
@@ -28,6 +29,8 @@ public class Game extends PApplet {
     private Spawner spawner;
     private Weapon activeWeapon;
     private List<Weapon> weaponsInventory = new ArrayList<>();
+
+    private SpriteManager spriteManager;
     
     
     public Game() {
@@ -59,6 +62,8 @@ public class Game extends PApplet {
         // configs.put( "NConfigWeaponGrenade", new NConfigWeaponGrenade() );
         // System.out.println("Loaded configs: " + configs.keySet());
         // NConfig.getInstance().saveAllConfigs( configs );
+
+        spriteManager = new SpriteManager( "assets/graphics/sprites/" );
 
         base = new Base( width * 0.5f, height * 0.5f, 100, 100 );
 
@@ -196,5 +201,10 @@ public class Game extends PApplet {
             weaponsInventory.addFirst( activeWeapon );
             activeWeapon = weaponsInventory.getLast();
         }
+    }
+
+
+    public SpriteManager getSpriteManager() {
+        return this.spriteManager;
     }
 }

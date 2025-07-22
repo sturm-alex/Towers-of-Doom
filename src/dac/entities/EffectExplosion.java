@@ -5,6 +5,7 @@ import dac.util.collision.ColliderCircle;
 
 import processing.core.PApplet;
 import processing.core.PGraphics;
+import processing.core.PImage;
 import processing.core.PVector;
 
 
@@ -14,12 +15,18 @@ public class EffectExplosion extends Effect {
     private float size;
     private ColliderCircle collider;
 
+    private PImage sprite;
+
 
     public EffectExplosion(float damage, PVector position, float size) {
         super( position, 150 );
         this.damage = damage;
         this.size = size;
         this.collider = new ColliderCircle( position, size * 0.5f );
+
+        // this.sprite = ( (PApplet) Game.getInstance() ).loadImage( "assets/graphics/sprites/explosion_1to4.png" );
+        this.sprite = Game.getInstance().getSpriteManager().getSprite( "explosion_1to4.png" );
+        assert this.sprite != null : "Sprite for EffectExplosion not found!";
     }
 
 
@@ -43,9 +50,13 @@ public class EffectExplosion extends Effect {
         if( isExpired() )
             return;
 
-        pG.strokeWeight( 15f );
-        pG.stroke( pG.color( 191, 127, 0 ) );
-        pG.fill( pG.color( 255, 255, 255 ) );
+        pG.imageMode( PGraphics.CENTER );
+        pG.image( sprite, position.x, position.y, size, size );
+
+        // Debugview
+        pG.strokeWeight( 1f );
+        pG.stroke( pG.color( 255 ) );
+        pG.fill( pG.color( 255, 0, 0, 63 ) );
         pG.circle( position.x, position.y, size );
     }
 
