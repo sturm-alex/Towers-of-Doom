@@ -31,6 +31,7 @@ public class SpriteManager {
             "explosion_1to4_big.png",
             "enemy_1.png",
             "enemy_2.png",
+            "partical_beam.png",
             "player_ship.png"
         );
 
@@ -64,6 +65,17 @@ public class SpriteManager {
                     getSprite( "explosion_1to4_big.png", 3 )
                 },
                 new float[] { 150, 250, 350, 500 }
+            ),
+            "EffectParticalBeam", new SpriteAnimation(
+                new PImage[] {
+                    getSprite( "partical_beam.png", 0 ),
+                    getSprite( "partical_beam.png", 1 ),
+                    getSprite( "partical_beam.png", 2 ),
+                    getSprite( "partical_beam.png", 3 ),
+                    getSprite( "partical_beam.png", 4 ),
+                    getSprite( "partical_beam.png", 5 )
+                },
+                new float[] { 150, 250, 350, 500, 600, 700 }
             )
         );
     }
