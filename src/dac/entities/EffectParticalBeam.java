@@ -68,9 +68,9 @@ public class EffectParticalBeam extends Effect {
 
 
         PVector base = Game.getInstance().getBasePosition();
-        PVector direction = collider.getDirection().copy().mult( range );
-
+  
         //Debug radius for damage area of Partical Beam
+        //PVector direction = collider.getDirection().copy().mult( range );
         //pG.pushStyle();
         //pG.strokeWeight( size );
         //pG.stroke( pG.color( 0, 191, 191, 63 ));

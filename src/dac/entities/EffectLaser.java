@@ -67,10 +67,9 @@ public class EffectLaser extends Effect {
             return;
 
         PVector base = Game.getInstance().getBasePosition();
-        PVector direction = collider.getDirection().copy().mult( range );
-
         
         //Debug radius for damage area of laser
+        //PVector direction = collider.getDirection().copy().mult( range );
         //pG.pushStyle();
         //pG.strokeWeight( size );
         //pG.stroke( pG.color( 0, 191, 191, 63 ) );
@@ -89,8 +88,8 @@ public class EffectLaser extends Effect {
         pG.translate(base.x, base.y);
         pG.rotate( (float)Math.atan2(position.y-base.y, position.x-base.x)+(float)(Math.PI*1.5f));
         pG.imageMode(PGraphics.CENTER);
-        pG.image( spriteAnimation.getCurrentSprite(),  0 , Config.laserRange/2 , Config.laserSize+Config.laserSize/2, Config.laserRange );
-        pG.image( spriteAnimation.getCurrentSprite(),  0 , Config.laserRange*1.5f , Config.laserSize/2+Config.laserSize/4, Config.laserRange );
+        pG.image( spriteAnimation.getCurrentSprite(),  0 , Config.laserRange/2 , size+size/2, Config.laserRange );
+        pG.image( spriteAnimation.getCurrentSprite(),  0 , Config.laserRange*1.5f , size/2+size/4, Config.laserRange );
         pG.popMatrix();
     }
 
