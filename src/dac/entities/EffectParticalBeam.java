@@ -3,6 +3,7 @@ package dac.entities;
 import dac.Game;
 import dac.util.SpriteAnimation;
 import dac.util.collision.ColliderRay;
+import dac.util.configuration.Config;
 import processing.core.PApplet;
 import processing.core.PGraphics;
 import processing.core.PImage;
@@ -67,24 +68,50 @@ public class EffectParticalBeam extends Effect {
 
 
         PVector base = Game.getInstance().getBasePosition();
+
         // System.out.println( collider.getDirection() );
         PVector direction = collider.getDirection().copy().mult( range );
+
+
+
         pG.pushStyle();
         pG.strokeWeight( size );
         pG.stroke( pG.color( 0, 191, 191, 63 ) );
         pG.strokeCap( PGraphics.ROUND );
-        pG.line( base.x, base.y, base.x + direction.x, base.y + direction.y );
+        pG.line( 
+            base.x, 
+            base.y, 
+            base.x + direction.x, 
+            base.y + direction.y );
         pG.strokeWeight( size * 0.5f );
-        pG.line( base.x + direction.x, base.y + direction.y, base.x + 2f * direction.x, base.y + 2f * direction.y );
+        pG.line( 
+            base.x + direction.x, 
+            base.y + direction.y, 
+            base.x + 2f * direction.x, 
+            base.y + 2f * direction.y );
         pG.popStyle();
 
         pG.strokeWeight( 3f );
         pG.stroke( pG.color( 0, 191, 191 ) );
         pG.fill( pG.color( 191, 255, 255 ) );
         pG.circle( position.x, position.y, size );
-        
-        pG.imageMode( PGraphics.CENTER );
-        pG.image( spriteAnimation.getCurrentSprite(), direction.x, direction.y, size*1.5f, size*1.5f );
+
+        //base.x  und base.y
+        // postion.x position.y
+        //yDifference = position.y - base.y
+        //xDifference = position.x - base.x 
+
+        // this shoud be rotating the beam png relativ to the base 
+        pG.translate(base.x, base.y);
+        pG.rotate( (float)Math.atan2(position.y-base.y, position.x-base.x)+(float)(Math.PI*1.5f));
+
+        pG.imageMode(PGraphics.CENTER);
+        pG.image( spriteAnimation.getCurrentSprite(),  0 , Config.particalBeamRange/2 , Config.particalBeamSize, Config.particalBeamRange );
+
+        pG.rotate( -(float)Math.atan2(position.y-base.y, position.x-base.x)+(float)(Math.PI*.5f));
+        pG.translate(-base.x, -base.y);
+        //pG.rotate((float)Math.PI);
     }
+    
 
 }

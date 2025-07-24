@@ -75,7 +75,7 @@ public class SpriteManager {
                     getSprite( "partical_beam.png", 4 ),
                     getSprite( "partical_beam.png", 5 )
                 },
-                new float[] { 150, 250, 350, 500, 600, 700 }
+                new float[] { 4, 8, 12, 16, 20, 24 }
             )
         );
     }

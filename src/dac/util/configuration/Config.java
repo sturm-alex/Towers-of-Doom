@@ -35,8 +35,8 @@ public abstract class Config {
     public final static int enemy1BaseSpeed = 50;
 
     public final static int particalBeamBaseDamage = 500;
-    public final static int particalBeamCooldown= 10000;//milliseconds
-    public final static int particalBeamRange = 900;
+    public final static int particalBeamCooldown= 25;//milliseconds
+    public final static int particalBeamRange = 400;
     public final static int particalBeamSize= 50;
 
     
