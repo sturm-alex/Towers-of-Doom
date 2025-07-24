@@ -68,50 +68,29 @@ public class EffectParticalBeam extends Effect {
 
 
         PVector base = Game.getInstance().getBasePosition();
-
-        // System.out.println( collider.getDirection() );
         PVector direction = collider.getDirection().copy().mult( range );
 
+        //Debug radius for damage area of Partical Beam
+        //pG.pushStyle();
+        //pG.strokeWeight( size );
+        //pG.stroke( pG.color( 0, 191, 191, 63 ));
+        //pG.strokeCap( PGraphics.ROUND );
+        //pG.line( base.x, base.y, base.x + direction.x, base.y + direction.y );
+        //pG.strokeWeight( size * 0.5f );
+        //pG.line( base.x + direction.x, base.y + direction.y, base.x + 2f * direction.x, base.y + 2f * direction.y );
+        //pG.popStyle();
+        //pG.strokeWeight( 3f );
+        //pG.stroke( pG.color( 0, 191, 191 ));
+        //pG.fill( pG.color( 191, 255, 255 ));
+        //pG.circle( position.x, position.y, size );
 
-
-        pG.pushStyle();
-        pG.strokeWeight( size );
-        pG.stroke( pG.color( 0, 191, 191, 63 ) );
-        pG.strokeCap( PGraphics.ROUND );
-        pG.line( 
-            base.x, 
-            base.y, 
-            base.x + direction.x, 
-            base.y + direction.y );
-        pG.strokeWeight( size * 0.5f );
-        pG.line( 
-            base.x + direction.x, 
-            base.y + direction.y, 
-            base.x + 2f * direction.x, 
-            base.y + 2f * direction.y );
-        pG.popStyle();
-
-        pG.strokeWeight( 3f );
-        pG.stroke( pG.color( 0, 191, 191 ) );
-        pG.fill( pG.color( 191, 255, 255 ) );
-        pG.circle( position.x, position.y, size );
-
-        //base.x  und base.y
-        // postion.x position.y
-        //yDifference = position.y - base.y
-        //xDifference = position.x - base.x 
-
-        // this shoud be rotating the beam png relativ to the base 
+        // this rotates and Positions the beam png relativ to the base and beam direction
+        pG.pushMatrix();
         pG.translate(base.x, base.y);
         pG.rotate( (float)Math.atan2(position.y-base.y, position.x-base.x)+(float)(Math.PI*1.5f));
-
         pG.imageMode(PGraphics.CENTER);
-        pG.image( spriteAnimation.getCurrentSprite(),  0 , Config.particalBeamRange/2 , Config.particalBeamSize, Config.particalBeamRange );
-
-        pG.rotate( -(float)Math.atan2(position.y-base.y, position.x-base.x)+(float)(Math.PI*.5f));
-        pG.translate(-base.x, -base.y);
-        //pG.rotate((float)Math.PI);
+        pG.image( spriteAnimation.getCurrentSprite(),  0 , Config.particalBeamRange/2 , size, Config.particalBeamRange );
+        pG.image( spriteAnimation.getCurrentSprite(),  0 , Config.particalBeamRange*1.5f , size/2, Config.particalBeamRange );
+        pG.popMatrix();
     }
-    
-
 }

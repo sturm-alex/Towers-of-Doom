@@ -26,7 +26,7 @@ public class EffectExplosion extends Effect {
         this.size = size;
         this.collider = new ColliderCircle( position, size * 0.5f );
 
-        this.sprite = Game.getInstance().getSpriteManager().getSprite( "explosion_1to4.png", 3 );
+        this.sprite = Game.getInstance().getSpriteManager().getSprite( "explosion_1to4.png", 0 );
         assert this.sprite != null : "Sprite for EffectExplosion not found!";
         
         this.spriteAnimation = Game.getInstance().getSpriteManager().getSpriteAnimation( "EffectExplosion" ).getNewInstance();
@@ -65,5 +65,4 @@ public class EffectExplosion extends Effect {
         pG.fill( pG.color( 255, 0, 0, 63 ) );
         pG.circle( position.x, position.y, size );
     }
-
 }

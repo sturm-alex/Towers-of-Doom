@@ -2,8 +2,11 @@ package dac.entities;
 
 import dac.Game;
 import dac.util.collision.ColliderRay;
+import dac.util.SpriteAnimation;
+import dac.util.configuration.Config;
 import processing.core.PApplet;
 import processing.core.PGraphics;
+import processing.core.PImage;
 import processing.core.PVector;
 
 
@@ -14,6 +17,8 @@ public class EffectLaser extends Effect {
     private float range;
     private ColliderRay collider;
 
+    private PImage sprite;
+    private SpriteAnimation spriteAnimation;
 
     public EffectLaser( float damage, PVector position, float size, float range, long lifetime ) {
         super( position, lifetime );
@@ -21,6 +26,13 @@ public class EffectLaser extends Effect {
         this.size = size;
         this.range = range;
         this.collider = new ColliderRay( new PVector(), new PVector( 1, 0 ) );
+
+        
+        this.sprite = Game.getInstance().getSpriteManager().getSprite( "laser.png",0);
+        assert this.sprite != null : "Sprite for EffectLaser not found!";
+        
+        this.spriteAnimation = Game.getInstance().getSpriteManager().getSpriteAnimation( "EffectLaser" ).getNewInstance();
+        assert this.spriteAnimation != null : "SpriteAnimation for EffectLaser not found!";
     }
 
 
@@ -45,6 +57,7 @@ public class EffectLaser extends Effect {
                 }
             }
         }
+        spriteAnimation.update();
     }
 
 
@@ -54,21 +67,31 @@ public class EffectLaser extends Effect {
             return;
 
         PVector base = Game.getInstance().getBasePosition();
-        // System.out.println( collider.getDirection() );
         PVector direction = collider.getDirection().copy().mult( range );
-        pG.pushStyle();
-        pG.strokeWeight( size );
-        pG.stroke( pG.color( 0, 191, 191, 63 ) );
-        pG.strokeCap( PGraphics.ROUND );
-        pG.line( base.x, base.y, base.x + direction.x, base.y + direction.y );
-        pG.strokeWeight( size * 0.5f );
-        pG.line( base.x + direction.x, base.y + direction.y, base.x + 2f * direction.x, base.y + 2f * direction.y );
-        pG.popStyle();
 
-        pG.strokeWeight( 3f );
-        pG.stroke( pG.color( 0, 191, 191 ) );
-        pG.fill( pG.color( 191, 255, 255 ) );
-        pG.circle( position.x, position.y, size );
+        
+        //Debug radius for damage area of laser
+        //pG.pushStyle();
+        //pG.strokeWeight( size );
+        //pG.stroke( pG.color( 0, 191, 191, 63 ) );
+        //pG.strokeCap( PGraphics.ROUND );
+        //pG.line( base.x, base.y, base.x + direction.x, base.y + direction.y );
+        //pG.strokeWeight( size * 0.5f );
+        //pG.line( base.x + direction.x, base.y + direction.y, base.x + 2f * direction.x, base.y + 2f * direction.y );
+        //pG.popStyle();
+        //pG.strokeWeight( 3f );
+        //pG.stroke( pG.color( 0, 191, 191 ) );
+        //pG.fill( pG.color( 191, 255, 255 ) );
+        //pG.circle( position.x, position.y, size );
+
+        //The Animation for the laser abgekapselt für beam/image alignment 
+        pG.pushMatrix();
+        pG.translate(base.x, base.y);
+        pG.rotate( (float)Math.atan2(position.y-base.y, position.x-base.x)+(float)(Math.PI*1.5f));
+        pG.imageMode(PGraphics.CENTER);
+        pG.image( spriteAnimation.getCurrentSprite(),  0 , Config.laserRange/2 , Config.laserSize+Config.laserSize/2, Config.laserRange );
+        pG.image( spriteAnimation.getCurrentSprite(),  0 , Config.laserRange*1.5f , Config.laserSize/2+Config.laserSize/4, Config.laserRange );
+        pG.popMatrix();
     }
 
 }

@@ -2,7 +2,7 @@ package dac.util;
 
 import java.util.List;
 import java.util.Map;
-
+import dac.util.configuration.Config;
 import dac.Game;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -32,6 +32,7 @@ public class SpriteManager {
             "enemy_1.png",
             "enemy_2.png",
             "partical_beam.png",
+            "laser.png",
             "player_ship.png"
         );
 
@@ -64,7 +65,11 @@ public class SpriteManager {
                     getSprite( "explosion_1to4_big.png", 2 ),
                     getSprite( "explosion_1to4_big.png", 3 )
                 },
-                new float[] { 150, 250, 350, 500 }
+                new float[] { 
+                    (Config.grenadeExplosionDuration/4)*1, 
+                    (Config.grenadeExplosionDuration/4)*2, 
+                    (Config.grenadeExplosionDuration/4)*3,
+                    Config.grenadeExplosionDuration }
             ),
             "EffectParticalBeam", new SpriteAnimation(
                 new PImage[] {
@@ -75,7 +80,34 @@ public class SpriteManager {
                     getSprite( "partical_beam.png", 4 ),
                     getSprite( "partical_beam.png", 5 )
                 },
-                new float[] { 4, 8, 12, 16, 20, 24 }
+                new float[] { 
+                    (((float)Config.particalBeamBaseDuration/6)*1), 
+                    (((float)Config.particalBeamBaseDuration/6)*2), 
+                    (((float)Config.particalBeamBaseDuration/6)*3), 
+                    (((float)Config.particalBeamBaseDuration/6)*4), 
+                    (((float)Config.particalBeamBaseDuration/6)*5), 
+                    (float)Config.particalBeamBaseDuration }
+            ),
+            "EffectLaser", new SpriteAnimation(
+                new PImage[] {
+                    getSprite( "laser.png", 0 ),
+                    getSprite( "laser.png", 1 ),
+                    getSprite( "laser.png", 2 ),
+                    getSprite( "laser.png", 3 ),
+                    getSprite( "laser.png", 4 ),
+                    getSprite( "laser.png", 5 ),
+                    getSprite( "laser.png", 6 ),
+                    getSprite( "laser.png", 7 )
+                },
+                new float[] { 
+                    (((float)Config.laserCooldown/8)*1), 
+                    (((float)Config.laserCooldown/8)*2), 
+                    (((float)Config.laserCooldown/8)*3), 
+                    (((float)Config.laserCooldown/8)*4), 
+                    (((float)Config.laserCooldown/8)*5), 
+                    (((float)Config.laserCooldown/8)*6), 
+                    (((float)Config.laserCooldown/8)*7), 
+                    (float)Config.laserCooldown }
             )
         );
     }

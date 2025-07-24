@@ -21,7 +21,7 @@ public abstract class Config {
     public final static int grenadeRange = 500;
 
     public final static int laserBaseDamage = 15;
-    public final static int laserCooldown = 25;
+    public final static int laserCooldown = 25;// milliseconds
     public final static int laserRange = 250;
     public final static int laserSize = 25;
 
@@ -34,8 +34,9 @@ public abstract class Config {
     public final static int enemy1BaseHP = 100;
     public final static int enemy1BaseSpeed = 50;
 
-    public final static int particalBeamBaseDamage = 500;
-    public final static int particalBeamCooldown= 25;//milliseconds
+    public final static int particalBeamBaseDamage = 50000;
+    public final static int particalBeamBaseDuration = 250;
+    public final static int particalBeamCooldown= 2500;//milliseconds
     public final static int particalBeamRange = 400;
     public final static int particalBeamSize= 50;
 
