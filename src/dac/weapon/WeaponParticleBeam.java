@@ -1,16 +1,16 @@
 package dac.weapon;
 
 import dac.Game;
-import dac.entities.EffectParticalBeam;
-import dac.util.configuration.NConfigWeaponParticalBeam;
+import dac.entities.EffectParticleBeam;
+import dac.util.configuration.NConfigWeaponParticleBeam;
 import processing.core.PVector;
 
-public class WeaponParticalBeam extends Weapon {
+public class WeaponParticleBeam extends Weapon {
 
     private int fallOffRange;
 
 
-    public WeaponParticalBeam( NConfigWeaponParticalBeam particalBeamConfig ) {
+    public WeaponParticleBeam( NConfigWeaponParticleBeam particalBeamConfig ) {
         super( particalBeamConfig );
         this.fallOffRange = particalBeamConfig.fallOffRange;
     }
@@ -25,7 +25,7 @@ public class WeaponParticalBeam extends Weapon {
 
         PVector targetLimitedRange = PVector.add( base, PVector.sub( target, base ).limit( range ) );
 
-        Game.getInstance().addEffect( new EffectParticalBeam( damage, targetLimitedRange, size, range, cooldownMax ) );
+        Game.getInstance().addEffect( new EffectParticleBeam( damage, targetLimitedRange, size, range, (long) ( 0.9 * cooldownMax ) ) );
 
         cooldownRemaining = cooldownMax;
     }
