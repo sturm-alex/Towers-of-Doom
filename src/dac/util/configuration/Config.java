@@ -34,11 +34,17 @@ public abstract class Config {
     public final static int enemy1BaseHP = 100;
     public final static int enemy1BaseSpeed = 50;
 
+    public final static int particalBeamBaseDamage = 500;
+    public final static int particalBeamCooldown= 10000;//milliseconds
+    public final static int particalBeamRange = 900;
+    public final static int particalBeamSize= 50;
+
     
     public static Map<String, Class<? extends Config>> getConfigClasses() {
         return Map.of(
             "NConfigWeapon", NConfigWeapon.class,
             "NConfigWeaponLaser", NConfigWeaponLaser.class,
+            "NConfigWeaponParticalBeam", NConfigWeaponParticalBeam.class,
             "NConfigWeaponGrenade", NConfigWeaponGrenade.class
         );
     }

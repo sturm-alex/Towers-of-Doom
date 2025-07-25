@@ -5,6 +5,7 @@ import dac.util.configuration.Config;
 import dac.util.configuration.NConfigWeapon;
 import dac.util.configuration.NConfigWeaponGrenade;
 import dac.util.configuration.NConfigWeaponLaser;
+import dac.util.configuration.NConfigWeaponParticalBeam;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +29,13 @@ public abstract class Weapon {
         laserConfig.size = Config.laserSize;
         laserConfig.fallOffRange = 200;
         weapons.put("Laser", new WeaponLaser( laserConfig ) );
+        NConfigWeaponParticalBeam particalBeamConfig = new NConfigWeaponParticalBeam();
+        particalBeamConfig.damage = Config.particalBeamBaseDamage;
+        particalBeamConfig.cooldown = Config.particalBeamCooldown;    
+        particalBeamConfig.range = Config.particalBeamRange;
+        particalBeamConfig.size = Config.particalBeamSize;
+        particalBeamConfig.fallOffRange = 200;
+        weapons.put("Partical", new WeaponParticalBeam( particalBeamConfig ) );
         // Add more weapons as needed
     }
 
