@@ -7,12 +7,12 @@ import processing.core.PVector;
 
 public class WeaponLaser extends Weapon {
 
-    private int fallOffRange;
+    private float fallOffPercent;
 
 
     public WeaponLaser( NConfigWeaponLaser laserConfig ) {
         super( laserConfig );
-        this.fallOffRange = laserConfig.fallOffRange;
+        this.fallOffPercent = laserConfig.fallOffPercent;
     }
 
 
@@ -25,7 +25,7 @@ public class WeaponLaser extends Weapon {
 
         PVector targetLimitedRange = PVector.add( base, PVector.sub( target, base ).limit( range ) );
 
-        Game.getInstance().addEffect( new EffectLaser( damage, targetLimitedRange, size, range, cooldownMax ) );
+        Game.getInstance().addEffect( new EffectLaser( damage, base, targetLimitedRange, size, range, fallOffPercent, cooldownMax ) );
 
         cooldownRemaining = cooldownMax;
     }

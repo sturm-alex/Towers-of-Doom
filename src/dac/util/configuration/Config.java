@@ -20,16 +20,17 @@ public abstract class Config {
     public final static int granadeAktivationInterval= 1000;//milliseconds
     public final static int grenadeRange = 500;
 
-    public final static int laserBaseDamage = 15;
+    public final static int laserBaseDamage = 5;
     public final static int laserCooldown = 25;
-    public final static int laserRange = 250;
-    public final static int laserSize = 25;
+    public final static int laserRange = 600;
+    public final static float laserFallOffPercent = 0.65f;  // % of the range where damage starts to fall off towards 0
+    public final static int laserSize = 15;
 
     public final static int enemySpawnPerSecond = 10;
     public final static int enemySpawnInterval = 1000 / enemySpawnPerSecond;//milliseconds
     public final static int enemyBaseDamageMult = 1;
     public final static int enemy1BaseDamage = 10;
-    public final static int enemy1BaseDurchmesser = 10;
+    public final static int enemy1BaseDurchmesser = 25;
     public final static int enemy1BaseRadius = enemy1BaseDurchmesser/2;
     public final static int enemy1BaseHP = 100;
     public final static int enemy1BaseSpeed = 50;

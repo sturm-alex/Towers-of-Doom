@@ -74,7 +74,7 @@ public class Game extends PApplet {
         activeWeapon = Weapon.get( "Bomb" );
         System.out.println("Weapon selected: Bomb" );
         weaponsInventory.add( Weapon.get( "Laser" ) );
-        weaponsInventory.add( Weapon.get( "Partical" ) );
+        weaponsInventory.add( Weapon.get( "Particle" ) );
         
         Timer.createSingleton( this );
     }

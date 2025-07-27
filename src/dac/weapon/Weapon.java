@@ -27,15 +27,15 @@ public abstract class Weapon {
         laserConfig.cooldown = Config.laserCooldown;    
         laserConfig.range = Config.laserRange;
         laserConfig.size = Config.laserSize;
-        laserConfig.fallOffRange = 200;
+        laserConfig.fallOffPercent = Config.laserFallOffPercent;  // % of the range where damage starts to fall off towards 0
         weapons.put("Laser", new WeaponLaser( laserConfig ) );
-        NConfigWeaponParticleBeam particalBeamConfig = new NConfigWeaponParticleBeam();
-        particalBeamConfig.damage = Config.particleBeamBaseDamage;
-        particalBeamConfig.cooldown = Config.particleBeamCooldown;    
-        particalBeamConfig.range = Config.particleBeamRange;
-        particalBeamConfig.size = Config.particleBeamSize;
-        particalBeamConfig.fallOffRange = 200;
-        weapons.put("Partical", new WeaponParticleBeam( particalBeamConfig ) );
+        NConfigWeaponParticleBeam particleBeamConfig = new NConfigWeaponParticleBeam();
+        particleBeamConfig.damage = Config.particleBeamBaseDamage;
+        particleBeamConfig.cooldown = Config.particleBeamCooldown;    
+        particleBeamConfig.range = Config.particleBeamRange;
+        particleBeamConfig.size = Config.particleBeamSize;
+        particleBeamConfig.fallOffRange = 200;
+        weapons.put("Particle", new WeaponParticleBeam( particleBeamConfig ) );
         // Add more weapons as needed
     }
 

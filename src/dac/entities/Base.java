@@ -15,7 +15,7 @@ public class Base {
 
 
   public PVector getPosition() {
-    return position;
+    return position.copy();
   }
   public ColliderCircle getCollider() {
     return collider;

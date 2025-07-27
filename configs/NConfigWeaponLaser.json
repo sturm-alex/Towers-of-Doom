@@ -3,5 +3,5 @@
   "cooldown" : 25,
   "range" : 250,
   "size" : 25,
-  "fallOffRange" : 500
+  "fallOffPercent" : 0.8
 }
