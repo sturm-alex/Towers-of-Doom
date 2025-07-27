@@ -7,12 +7,9 @@ import processing.core.PVector;
 
 public class WeaponParticleBeam extends Weapon {
 
-    private int fallOffRange;
-
 
     public WeaponParticleBeam( NConfigWeaponParticleBeam particalBeamConfig ) {
         super( particalBeamConfig );
-        this.fallOffRange = particalBeamConfig.fallOffRange;
     }
 
 

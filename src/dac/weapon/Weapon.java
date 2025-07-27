@@ -34,7 +34,6 @@ public abstract class Weapon {
         particleBeamConfig.cooldown = Config.particleBeamCooldown;    
         particleBeamConfig.range = Config.particleBeamRange;
         particleBeamConfig.size = Config.particleBeamSize;
-        particleBeamConfig.fallOffRange = 200;
         weapons.put("Particle", new WeaponParticleBeam( particleBeamConfig ) );
         // Add more weapons as needed
     }

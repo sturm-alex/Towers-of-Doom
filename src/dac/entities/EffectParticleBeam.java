@@ -8,7 +8,6 @@ import dac.util.Timer;
 import dac.util.collision.ColliderRay;
 import processing.core.PApplet;
 import processing.core.PGraphics;
-import processing.core.PImage;
 import processing.core.PVector;
 
 
